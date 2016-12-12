@@ -4,7 +4,7 @@ var gridField = [];
 var detectCollision = false;
 var followPacman = [];
 var gameover = false;
-var button = document.getElementById("button");
+var p = document.getElementById("p");
 
 window.addEventListener("keyup", move);
 function setUp () {
@@ -33,13 +33,14 @@ function setUp () {
     if (gameover) {
       clearInterval(displayAll);
       clearInterval(moveGhost);
+      p.innerHTML = "refresh page to start again";
     }
     ctx.clearRect(0, 0, 400, 400);
     food.createFood();
     draw(ctx);
     console.log(gameover);
 
-    
+
   }, 10);
 
   var moveGhost = setInterval(function () {
@@ -48,19 +49,6 @@ function setUp () {
 
   }, 1500)
 
-  button.addEventListener("click", function () {
-    pacman.x = 20;
-    pacman.y = 20;
-    ghost.x = -40;
-    ghost.y = -40;
-    console.log(ghost.y)
-    followPacman = [];
-    food.createFood();
-    setInterval(displayAll);
-    setInterval(moveGhost);
-    gameover = false;
-    console.log(gameover + " button is clicked");
-  });
 };
 
 
