@@ -4,21 +4,14 @@ var gridField = [];
 var detectCollision = false;
 var followPacman = [];
 var gameover = false;
-var button = document.getElementById("button");
+var p = document.getElementById("p");
 
 window.addEventListener("keyup", move);
-
 function setUp () {
   var canvas = document.getElementById("pacman-board");
   var ctx = canvas.getContext("2d");
   var walls = 50;
   canvas.style.backgroundColor = "#03196E";
-
-  // for (var j =0; j < gridField.length; i++) {
-  //   if (!gridField.wallBuilt) {
-  //     pacman = new pacmanCreator (gridField[j].startingX+20, gridField[j].startingY+20, 10, ctx);
-  //   }
-  // }
   grid(ctx);
   pacman = new pacmanCreator (gridField[0].startingX+20, gridField[0].startingY+20, 10, ctx);
   ghost = new Enemy (-40, -40, ctx);
@@ -32,9 +25,10 @@ function setUp () {
   var displayAll = setInterval(function(){
     enemyCollidePlayer();
     if (gameover) {
-     clearInterval(displayAll);
-     clearInterval(moveGhost);
-   }
+      clearInterval(displayAll);
+      clearInterval(moveGhost);
+      p.innerHTML = "refresh page to play again";
+    }
     ctx.clearRect(0, 0, 400, 400);
     food.createFood();
     draw(ctx);
@@ -46,21 +40,9 @@ function setUp () {
   var moveGhost = setInterval(function () {
     ghost.updateValue();
     ghost.createGhost();
+
   }, 1500)
 
-  button.addEventListener("click", function () {
-    pacman.x = 20;
-    pacman.y = 20;
-    ghost.x = -40;
-    ghost.y = -40;
-    console.log(ghost.y)
-    followPacman = [];
-    food.createFood();
-    setInterval(displayAll);
-    setInterval(moveGhost);
-    gameover = false;
-    console.log(gameover + " button is clicked");
-  });
 };
 
 
@@ -206,8 +188,7 @@ function checkWalls (ctx) {
 
   function enemyCollidePlayer () {
     if (ghost.x === pacman.x && ghost.y === pacman.y) {
-      clearInterval(displayAll);
-      clearInterval(moveGhost);
+
       return gameover = true;
     }
   }
