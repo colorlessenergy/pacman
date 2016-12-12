@@ -31,6 +31,10 @@ function setUp () {
 
   var displayAll = setInterval(function(){
     enemyCollidePlayer();
+    if (gameover) {
+     clearInterval(displayAll);
+     clearInterval(moveGhost);
+   }
     ctx.clearRect(0, 0, 400, 400);
     food.createFood();
     draw(ctx);
@@ -52,6 +56,8 @@ function setUp () {
     console.log(ghost.y)
     followPacman = [];
     food.createFood();
+    setInterval(displayAll);
+    setInterval(moveGhost);
     gameover = false;
     console.log(gameover + " button is clicked");
   });
