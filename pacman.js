@@ -3,8 +3,7 @@ function pacmanCreator (x, y, r, ctx) {
   this.y = y;
   this.r = r;
   this.ctx = ctx;
-  this.pacman = this;
-  
+  this.pacman = this;  
   this.createPacman = function () {
 
     this.ctx.beginPath();

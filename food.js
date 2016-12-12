@@ -1,7 +1,6 @@
 function Food (ctx) {
   this.ctx = ctx;
-  this.counter = 0;
-  
+  this.counter = 0;  
   this.createFood = function () {
     for (var i = 0; i < gridField.length; i++) {
       if (!gridField[i].wallBuilt && !gridField[i].fruitEaten) {

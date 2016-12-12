@@ -1,5 +1,4 @@
-function Enemy (x, y, ctx) {
-  
+function Enemy (x, y, ctx) {  
     this.x = x;
     this.y = y;
     this.r = 10;

@@ -39,7 +39,7 @@ function setUp () {
     draw(ctx);
     console.log(gameover);
 
-
+    
   }, 10);
 
   var moveGhost = setInterval(function () {
