@@ -7,7 +7,6 @@ var gameover = false;
 var button = document.getElementById("button");
 
 window.addEventListener("keyup", move);
-
 function setUp () {
   var canvas = document.getElementById("pacman-board");
   var ctx = canvas.getContext("2d");
@@ -31,6 +30,10 @@ function setUp () {
 
   var displayAll = setInterval(function(){
     enemyCollidePlayer();
+    if (gameover) {
+      clearInterval(displayAll);
+      clearInterval(moveGhost);
+    }
     ctx.clearRect(0, 0, 400, 400);
     food.createFood();
     draw(ctx);
@@ -42,6 +45,7 @@ function setUp () {
   var moveGhost = setInterval(function () {
     ghost.updateValue();
     ghost.createGhost();
+
   }, 1500)
 
   button.addEventListener("click", function () {
@@ -52,6 +56,8 @@ function setUp () {
     console.log(ghost.y)
     followPacman = [];
     food.createFood();
+    setInterval(displayAll);
+    setInterval(moveGhost);
     gameover = false;
     console.log(gameover + " button is clicked");
   });
@@ -200,8 +206,7 @@ function checkWalls (ctx) {
 
   function enemyCollidePlayer () {
     if (ghost.x === pacman.x && ghost.y === pacman.y) {
-      clearInterval(displayAll);
-      clearInterval(moveGhost);
+
       return gameover = true;
     }
   }
